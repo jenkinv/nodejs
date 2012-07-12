@@ -35,4 +35,5 @@ app.get('/release', routes.release);
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  console.log("请不要关闭这个窗口");
 });
