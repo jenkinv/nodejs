@@ -28,7 +28,7 @@ $(document).ready(function(){
   });
 
   window.setTimeout(function(){
-    window.reload();
+    location.reload();
   }, 5000);
 
 });
