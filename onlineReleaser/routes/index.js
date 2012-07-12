@@ -37,11 +37,18 @@ exports.update = function(req, res) {
   return false;
 };
 
+var releaseLock = false;//发布过程不允许并发，这里加锁
 exports.release = function(req, res) {
+  if(releaseLock) {
+    res.send('发布操作正在进行中，请稍后再试！');
+    return
+  }
+  releaseLock = true;
   function parse(error, stdout, stderr) {
     if(error) console.log(error)
     console.log(stdout);
     console.log(stderr);
+    releaseLock = false;
     res.send(stdout);
   }
   try {
