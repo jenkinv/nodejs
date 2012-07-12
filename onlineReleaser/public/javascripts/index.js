@@ -26,4 +26,9 @@ $(document).ready(function(){
       }
     });
   });
+
+  window.setTimeout(function(){
+    window.reload();
+  }, 5000);
+
 });
