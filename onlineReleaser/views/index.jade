@@ -1,0 +1,36 @@
+
+.left
+  h2 当前登录信息
+  if !!localName
+    div Hi~，#{localName}，你的IP是 #{localIp}
+  else
+    div Hi~，你的IP是 #{localIp}
+  label 请输入或修改你的名字：
+    input(maxlength="20",name="name", id="name")
+    if !!localName
+      input(type="button", value="修改", id="update")
+    else
+      input(type="button", value="新增", id="update")
+  if remoteDesktopIp != "0.0.0.0"
+    div 打包机器上当前远程登录的IP是 
+      span(style="color:red") 
+        |#{remoteDesktopIp}
+        if !!remoteDesktopName
+          |，名字是#{remoteDesktopName}
+  else
+    div(style="color:red") 打包机器空闲
+    input(type="button", value="执行一键打包脚本", id="release")
+    #releaserResult(style="display:none;")
+      p 一键打包脚本开始执行，请稍候...
+
+.right
+  h2 登记在案的IP名字列表
+  - if (clientIPs.length)
+  table
+    tbody
+    - clientIPs.forEach(function(item){
+      tr
+        td(style="width:150px;")= item.ip 
+        td= item.name
+    - })
+
